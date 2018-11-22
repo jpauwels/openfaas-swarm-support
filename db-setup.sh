@@ -7,4 +7,8 @@ db.createUser({user: 'jamendo-readwrite', pwd: '${MONGO_JAMENDO_READWRITE_PASSWO
 db = db.getSiblingDB('deezer');
 db.createUser({user: 'deezer-read', pwd: '${MONGO_DEEZER_READ_PASSWORD}', roles: ['read']});
 db.createUser({user: 'deezer-readwrite', pwd: '${MONGO_DEEZER_READWRITE_PASSWORD}', roles: ['readWrite']});
+
+db = db.getSiblingDB('musiclynx');
+db.createUser({user: 'musiclynx-read', pwd: '${MONGO_MUSICLYNX_READ_PASSWORD}', roles: ['read']});
+db.createUser({user: 'musiclynx-readwrite', pwd: '${MONGO_MUSICLYNX_READWRITE_PASSWORD}', roles: ['readWrite']});
 "
