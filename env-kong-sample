@@ -1,0 +1,2 @@
+POSTGRES_PASSWORD=secretpassword
+KONG_PG_PASSWORD=secretpassword
