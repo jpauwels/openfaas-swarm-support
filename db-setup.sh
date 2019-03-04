@@ -1,14 +1,7 @@
-#!/bin/sh
-mongo --eval "
-db = db.getSiblingDB('jamendo');
-db.createUser({user: 'jamendo-read', pwd: '${MONGO_JAMENDO_READ_PASSWORD}', roles: ['read']});
-db.createUser({user: 'jamendo-readwrite', pwd: '${MONGO_JAMENDO_READWRITE_PASSWORD}', roles: ['readWrite']});
+#!/bin/bash
+read -r -a USERS <<< ${MONGO_USERS}
 
-db = db.getSiblingDB('deezer');
-db.createUser({user: 'deezer-read', pwd: '${MONGO_DEEZER_READ_PASSWORD}', roles: ['read']});
-db.createUser({user: 'deezer-readwrite', pwd: '${MONGO_DEEZER_READWRITE_PASSWORD}', roles: ['readWrite']});
-
-db = db.getSiblingDB('musiclynx');
-db.createUser({user: 'musiclynx-read', pwd: '${MONGO_MUSICLYNX_READ_PASSWORD}', roles: ['read']});
-db.createUser({user: 'musiclynx-readwrite', pwd: '${MONGO_MUSICLYNX_READWRITE_PASSWORD}', roles: ['readWrite']});
-"
+for ((i=0; i<"${#USERS[@]}"; i+=4));
+do
+    mongo --eval "db = db.getSiblingDB('${USERS[i]}'); db.createUser({user: '${USERS[i+1]}', pwd: '${USERS[i+2]}', roles: ['${USERS[i+3]}']});"
+done
