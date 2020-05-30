@@ -1,1 +1,4 @@
-env-file
+env-mongodb
+env-kong
+env-minio
+exports/
