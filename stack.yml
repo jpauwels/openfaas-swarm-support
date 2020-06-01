@@ -21,7 +21,7 @@ services:
      - func_functions
     env_file: env-mongodb
   minio:
-    image: "minio/minio:RELEASE.2019-02-26T19-51-46Z"
+    image: "minio/minio:RELEASE.2020-06-01T17-28-03Z"
     volumes:
      - /mnt/bigdata:/data
      - minio-config:/root/.minio
@@ -35,7 +35,7 @@ services:
         window: 60s
     command: server /data
   kong:
-    image: "kong:1.0"
+    image: "kong:2.0-centos"
     ports:
      - "8000:8000"
      - "8443:8443"
