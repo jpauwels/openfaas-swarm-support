@@ -1,4 +1,4 @@
 env-mongodb
 env-kong
-env-minio
+secrets
 exports/
