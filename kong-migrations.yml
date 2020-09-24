@@ -1,0 +1,30 @@
+version: "3.5"
+
+volumes:
+  kongdb-data:
+
+networks:
+  func_functions:
+    external: true
+
+secrets:
+  kong_postgres_password:
+    external: true
+  
+services:
+  kong-migrations:
+    image: "kong:2.0-centos"
+    networks:
+      - func_functions
+    secrets:
+      - kong_postgres_password
+    environment:
+      - KONG_DATABASE=postgres
+      - KONG_PG_HOST=kong-database
+      - KONG_PG_PASSWORD_FILE=/run/secrets/kong_postgres_password
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+      restart_policy:
+        condition: none
+    command: kong migrations bootstrap
