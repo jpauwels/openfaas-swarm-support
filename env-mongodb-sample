@@ -1,3 +1,0 @@
-MONGO_INITDB_ROOT_USERNAME=admin
-MONGO_INITDB_ROOT_PASSWORD=test
-MONGO_USERS=jamendo jamendo-read jam1 read   jamendo jamendo-readwrite jam2 readWrite  deezer deezer-read dee1 read   deezer deezer-readwrite dee2 readWrite   musiclynx musiclynx-read mus1 read   musiclynx musiclynx-readwrite mus2 readWrite
