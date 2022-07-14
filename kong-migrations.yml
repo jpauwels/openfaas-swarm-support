@@ -1,8 +1,5 @@
 version: "3.5"
 
-volumes:
-  kongdb-data:
-
 networks:
   func_functions:
     external: true
