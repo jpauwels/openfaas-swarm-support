@@ -3,7 +3,7 @@
 function kong_admin_curl {
     docker exec $(docker ps -q -f name="kong\.") curl $@
 }
-kong_admin_curl -X POST http://localhost:8001/services/ --data 'name=openfaas' --data 'url=http://gateway:8080'
+kong_admin_curl -X POST http://localhost:8001/services/ --data 'name=openfaas' --data 'url=http://gateway:8080' --data 'retries=1' --data 'read_timeout=2700000'
 kong_admin_curl -X POST http://localhost:8001/services/openfaas/routes --data 'name=openfaas-functions' --data 'paths[]=/function&paths[]=/async-function' --data 'strip_path=false'
 
 kong_admin_curl -X POST http://localhost:8001/services/ --data 'name=qbc' --data 'url=http://qbc_api:80'
