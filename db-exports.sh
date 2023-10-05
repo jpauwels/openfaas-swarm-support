@@ -1,3 +1,5 @@
 #!/bin/bash
-source env-mongodb
-docker exec $(./db-instancename.sh) sh -c "exec mongoexport -u ${MONGO_INITDB_ROOT_USERNAME} -p ${MONGO_INITDB_ROOT_PASSWORD} --authenticationDatabase admin --jsonArray --db ac_analysis_service --collection descriptors" > exports/descriptors-$(date -Iseconds).json
+MONGO_INITDB_ROOT_USERNAME=$(cat secrets/mongodb_root_username.txt)
+MONGO_INITDB_ROOT_PASSWORD=$(cat secrets/mongodb_root_password.txt)
+docker run --rm --network=func_functions mongo:5.0-focal sh -c "exec mongoexport --host faas_mongodb:27017 -u ${MONGO_INITDB_ROOT_USERNAME} -p ${MONGO_INITDB_ROOT_PASSWORD} --authenticationDatabase admin --db audiocommons --collection descriptors" > exports/audiocommons-descriptors-$(date -Iseconds).json
+#docker exec $(./db-instancename.sh) sh -c "exec mongoexport -u ${MONGO_INITDB_ROOT_USERNAME} -p ${MONGO_INITDB_ROOT_PASSWORD} --authenticationDatabase admin --db audiocommons --collection descriptors" > exports/audiocommons-descriptors-$(date -Iseconds).json
