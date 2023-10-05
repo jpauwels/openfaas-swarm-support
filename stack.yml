@@ -25,7 +25,7 @@ secrets:
 
 services:
   mongodb:
-    image: "mongo:5.0-focal"
+    image: "mongo:6-jammy"
     volumes:
       - mongodb-dbdata:/data/db
       - mongodb-configdata:/data/configdb
@@ -38,7 +38,7 @@ services:
       - MONGO_INITDB_ROOT_USERNAME_FILE=/run/secrets/mongodb_root_username
       - MONGO_INITDB_ROOT_PASSWORD_FILE=/run/secrets/mongodb_root_password
   minio:
-    image: "minio/minio:RELEASE.2022-07-08T00-05-23Z"
+    image: "quay.io/minio/minio:RELEASE.2022-10-24T18-35-07Z"
     volumes:
       - ${MINIO_STORAGE_PATH:-/mnt/bigdata}:/data
       - minio-config:/root/.minio
@@ -54,7 +54,7 @@ services:
         delay: 10s
         max_attempts: 10
         window: 60s
-    command: server /data
+    command: server /data --console-address ":9001"
   kong:
     image: "kong:2.8.1-alpine"
     user: "kong"
